@@ -30,10 +30,11 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+  - skor1 sürekli kendini güncelleyen bir kod iken,skor2 ise sadece çalıştığında kendini 1 kez güncelleyebilir. 
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
-  
+  - skor 1 closure kullanmaktadır.skorArtirici fonksiyonu bir değişken olarak çağırılıyor. 
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  - skor 1 skorun sürekli güncellenmesi açısından tercih edilebilir.skor 2'nin sadece anlık bir skor durumu olduğunda kullanılması mantıklıdır.
 */
 
 // skor1 kodları
@@ -64,12 +65,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru() {
+
+  let teamScore = Math.floor(Math.random() * 15) + 10;
+  return teamScore;
 }
-
-
-
+takimSkoru();
 
 /* Görev 3: macSonucu() 
 Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
@@ -86,13 +87,31 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(takimSkoru,çeyrek) {
+
+  let homeScore = [];
+  let awayScore = [];
+  
+  for (let index = 0; index < çeyrek; index++) {
+    homeScore[index] = takimSkoru();
+  }
+  for (let index = 0; index < çeyrek; index++) {
+    awayScore[index] = takimSkoru();
+  }
+
+  let FinalHomeScore = homeScore[0] + homeScore[1] + homeScore[2] + homeScore[3];
+  let FinalAwayScore = awayScore[0] + awayScore[1] + awayScore[2] + awayScore[3];
+
+  let FinalScore = {
+    "Ev Sahibi: ": FinalHomeScore,
+    "Konuk Takim: ": FinalAwayScore
+  };
+
+  return FinalScore;
+
 }
 
-
-
-
+console.log(macSonucu(takimSkoru,4));
 
 
 /* Zorlayıcı Görev 4: periyotSkoru()
@@ -108,11 +127,18 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
 }
   */
 
-
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(takimSkoru){
+  let homeScore = [];
+  let awayScore = [];
+  homeScore[0] = takimSkoru();
+  awayScore[0] = takimSkoru();
+  let PeriotScore = {
+    "Ev Sahibi: ": homeScore[0],
+    "Konuk Takim: ": awayScore[0]
+  };
+  return PeriotScore
 }
+console.log(periyotSkoru(takimSkoru));
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
